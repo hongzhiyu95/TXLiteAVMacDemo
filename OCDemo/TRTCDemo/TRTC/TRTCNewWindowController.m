@@ -116,7 +116,7 @@
     TRTCParams *param = [[TRTCParams alloc] init];
     param.sdkAppId = sdkAppID;
     param.userId = userID;
-    param.userSig = [GenerateTestUserSig gen:userID];
+    param.userSig = [GenerateTestUserSig genTestUserSig:userID];
     param.roomId = (UInt32)roomID.integerValue;
     param.role = TRTCSettingWindowController.isAudience ? TRTCRoleAudience : TRTCRoleAnchor;
     [self enterRoomWithParam:param];
