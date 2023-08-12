@@ -25,6 +25,7 @@
 		33443F742A8752C5004C8E99 /* TXSoundTouch.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6770F7E296E6992009B32F4 /* TXSoundTouch.xcframework */; };
 		33443F752A8752C5004C8E99 /* TXSoundTouch.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6770F7E296E6992009B32F4 /* TXSoundTouch.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		33443F782A8752C5004C8E99 /* TXLiteAVSDK_TRTC_Mac.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33443F772A8752C5004C8E99 /* TXLiteAVSDK_TRTC_Mac.xcframework */; };
+		33443F7D2A875A04004C8E99 /* GenerateTestUserSig.m in Sources */ = {isa = PBXBuildFile; fileRef = 33443F7B2A875A04004C8E99 /* GenerateTestUserSig.m */; };
 		453167F221E45560007A91CB /* TRTCNewWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453167EF21E4555F007A91CB /* TRTCNewWindowController.m */; };
 		453167F321E45560007A91CB /* TRTCNewWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453167F021E4555F007A91CB /* TRTCNewWindowController.xib */; };
 		457A707B2200814E00DD193B /* CaptureSourceCollectionItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457A70702200814D00DD193B /* CaptureSourceCollectionItem.xib */; };
@@ -86,6 +87,8 @@
 		06D5A6B324160A6500296793 /* bgm_demo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgm_demo.mp3; sourceTree = "<group>"; };
 		33443F702A8752B7004C8E99 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		33443F772A8752C5004C8E99 /* TXLiteAVSDK_TRTC_Mac.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TXLiteAVSDK_TRTC_Mac.xcframework; path = ../SDK/TXLiteAVSDK_TRTC_Mac.xcframework; sourceTree = "<group>"; };
+		33443F7B2A875A04004C8E99 /* GenerateTestUserSig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateTestUserSig.m; sourceTree = "<group>"; };
+		33443F7C2A875A04004C8E99 /* GenerateTestUserSig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenerateTestUserSig.h; sourceTree = "<group>"; };
 		453167EF21E4555F007A91CB /* TRTCNewWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTCNewWindowController.m; sourceTree = "<group>"; };
 		453167F021E4555F007A91CB /* TRTCNewWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRTCNewWindowController.xib; sourceTree = "<group>"; };
 		453167F121E4555F007A91CB /* TRTCNewWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTCNewWindowController.h; sourceTree = "<group>"; };
@@ -206,6 +209,8 @@
 		33443F7A2A87595B004C8E99 /* Usersig */ = {
 			isa = PBXGroup;
 			children = (
+				33443F7C2A875A04004C8E99 /* GenerateTestUserSig.h */,
+				33443F7B2A875A04004C8E99 /* GenerateTestUserSig.m */,
 			);
 			path = Usersig;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 				45AD95BF21D72C0F007B2EAF /* TRTCMainWindowController.m in Sources */,
 				45F96FC9223296E600E861EC /* TRTCApp.m in Sources */,
 				D689A93121CC97F300C7C618 /* AppDelegate.m in Sources */,
+				33443F7D2A875A04004C8E99 /* GenerateTestUserSig.m in Sources */,
 				457A707F2200814E00DD193B /* CaptureSourceCollectionItem.m in Sources */,
 				06D5A6AF24160A4A00296793 /* TRTCVideoCell.m in Sources */,
 				453167F221E45560007A91CB /* TRTCNewWindowController.m in Sources */,
