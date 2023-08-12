@@ -7,13 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "SDKHeader.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
+@class TRTCCloud;
 @interface TXCaptureSourceWindowController : NSWindowController
 
 @property (weak, nonatomic) TRTCCloud *engine;
-@property (copy, nonatomic) void(^onSelectSource)(TRTCScreenCaptureSourceInfo * _Nullable);
+@property (copy, nonatomic) void(^onSelectSource)(id  _Nullable);
+@property (copy, nonatomic) void(^onSelectSourceIndex)(int index);
 @property (nonatomic, readonly) BOOL usesBigStream;
 
 - (instancetype)initWithTRTCCloud:(TRTCCloud *)engine;

@@ -15,7 +15,7 @@
 #import "SDKHeader.h"
 #import "GenerateTestUserSig.h"
 #import "TRTCSettingWindowController.h"
-
+#import "TRTCCppWindow.h"
 @interface TRTCNewWindowController()
 {
     NSArray *_users;
@@ -23,7 +23,9 @@
 }
 @end
 
-@implementation TRTCNewWindowController
+@implementation TRTCNewWindowController{
+    TRTCCppWindow *_cppWindow;
+}
 
 - (void)windowDidLoad {
     [super windowDidLoad];
@@ -113,13 +115,17 @@
 }
 
 - (void)loginWithAppID:(UInt32)sdkAppID roomID:(NSString *)roomID userID:(NSString *)userID {
-    TRTCParams *param = [[TRTCParams alloc] init];
-    param.sdkAppId = sdkAppID;
-    param.userId = userID;
-    param.userSig = [GenerateTestUserSig genTestUserSig:userID];
-    param.roomId = (UInt32)roomID.integerValue;
-    param.role = TRTCSettingWindowController.isAudience ? TRTCRoleAudience : TRTCRoleAnchor;
-    [self enterRoomWithParam:param];
+        _cppWindow = [[TRTCCppWindow alloc]initWithWindowNibName:NSStringFromClass([TRTCCppWindow class])];
+        [_cppWindow loginWithRoomID:roomID userid:userID];
+        [_cppWindow showWindow:nil];
+        [_cppWindow.window orderFront:nil];
+//    TRTCParams *param = [[TRTCParams alloc] init];
+//    param.sdkAppId = sdkAppID;
+//    param.userId = userID;
+//    param.userSig = [GenerateTestUserSig genTestUserSig:userID];
+//    param.roomId = (UInt32)roomID.integerValue;
+//    param.role = TRTCSettingWindowController.isAudience ? TRTCRoleAudience : TRTCRoleAnchor;
+//    [self enterRoomWithParam:param];
 }
 
 @end

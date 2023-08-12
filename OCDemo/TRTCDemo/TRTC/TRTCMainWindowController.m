@@ -360,12 +360,14 @@ typedef NS_ENUM(NSUInteger, LayoutStyle) {
 - (IBAction)onClickScreenCapture:(id)sender {
     self.captureSourceWindowController = [[TXCaptureSourceWindowController alloc] initWithTRTCCloud:_trtcEngine];
     __weak TRTCMainWindowController *wself = self;
-    self.captureSourceWindowController.onSelectSource = ^(TRTCScreenCaptureSourceInfo * _Nonnull source) {
+    self.captureSourceWindowController.onSelectSource = ^(TRTCScreenCaptureSourceInfo  * _Nullable source) {
         __strong TRTCMainWindowController *self = wself;
         if (!self) return;
-        
+      
         [self.trtcEngine stopScreenCapture];
-
+      
+       
+     
         if (source && source.type != TRTCScreenCaptureSourceTypeUnknown) {
             if (source.type == TRTCScreenCaptureSourceTypeWindow) {
                 [self.trtcEngine selectScreenCaptureTarget:source rect:CGRectZero capturesCursor:NO highlight:YES];
@@ -383,6 +385,8 @@ typedef NS_ENUM(NSUInteger, LayoutStyle) {
         [self.window endSheet:self.captureSourceWindowController.window];
         [self.captureSourceWindowController.window close];
     };
+       
+    
     NSRect frame = self.window.frame;
     NSWindow *window = self.captureSourceWindowController.window;
     [window setFrame:frame display:YES animate:NO];

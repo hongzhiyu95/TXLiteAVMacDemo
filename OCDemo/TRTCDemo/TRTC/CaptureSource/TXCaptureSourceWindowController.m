@@ -9,8 +9,7 @@
 #import "TXCaptureSourceWindowController.h"
 #import "CaptureSourceCollectionItem.h"
 #import "TXCaptureSourceCollectionHeaderView.h"
-#import "SDKHeader.h"
-
+#import <TXLiteAVSDK_TRTC_Mac/TRTCCloud.h>
 @interface TXCaptureSourceWindowController () <NSCollectionViewDelegate, NSCollectionViewDataSource>
 {
     NSArray<TRTCScreenCaptureSourceInfo*> *windowList;
@@ -26,7 +25,7 @@
 - (instancetype)initWithTRTCCloud:(TRTCCloud *)engine
 {
     if (self = [super initWithWindowNibName:NSStringFromClass([self class])]) {
-        _engine = engine;
+        _engine = [TRTCCloud sharedInstance];
     }
     return self;
 }
@@ -60,6 +59,10 @@
 - (IBAction)endScreenShare:(id)sender {
     if (self.onSelectSource) {
         self.onSelectSource(nil);
+
+    }
+    if(self.onSelectSourceIndex){
+        self.onSelectSourceIndex(-1);
     }
 }
 
@@ -95,6 +98,17 @@
     if (self.onSelectSource != nil) {
         NSIndexPath *indexPath = indexPaths.anyObject;
         self.onSelectSource(sections[indexPath.section][indexPath.item]);
+    
+    }
+    if(self.onSelectSourceIndex){
+        NSIndexPath *indexPath = indexPaths.anyObject;
+        TRTCScreenCaptureSourceInfo *info = sections[indexPath.section][indexPath.item];
+        if(info.type == TRTCScreenCaptureSourceTypeWindow ){
+            self.onSelectSourceIndex(indexPath.item+screenList.count);
+        }else{
+            self.onSelectSourceIndex(indexPath.item);
+        }
+        
     }
 }
 
