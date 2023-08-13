@@ -107,25 +107,33 @@
     }
     [self loginWithAppID:_SDKAppID roomID:self.roomidField.stringValue userID:self.useridField.stringValue];
 }
+- (IBAction)enterCppVC:(id)sender {
+    [self loginCppWithAppID:_SDKAppID roomID:self.roomidField.stringValue userID:self.useridField.stringValue];
+}
 
 - (void)enterRoomWithParam:(TRTCParams *)params {
     if (self.onLogin) {
         self.onLogin(params);
     }
 }
-
+- (void)loginCppWithAppID:(UInt32)sdkAppID roomID:(NSString *)roomID userID:(NSString *)userID {
+            _cppWindow = [[TRTCCppWindow alloc]initWithWindowNibName:NSStringFromClass([TRTCCppWindow class])];
+            [_cppWindow loginWithRoomID:roomID userid:userID];
+            [_cppWindow showWindow:nil];
+            [_cppWindow.window orderFront:nil];
+}
 - (void)loginWithAppID:(UInt32)sdkAppID roomID:(NSString *)roomID userID:(NSString *)userID {
-        _cppWindow = [[TRTCCppWindow alloc]initWithWindowNibName:NSStringFromClass([TRTCCppWindow class])];
-        [_cppWindow loginWithRoomID:roomID userid:userID];
-        [_cppWindow showWindow:nil];
-        [_cppWindow.window orderFront:nil];
-//    TRTCParams *param = [[TRTCParams alloc] init];
-//    param.sdkAppId = sdkAppID;
-//    param.userId = userID;
-//    param.userSig = [GenerateTestUserSig genTestUserSig:userID];
-//    param.roomId = (UInt32)roomID.integerValue;
-//    param.role = TRTCSettingWindowController.isAudience ? TRTCRoleAudience : TRTCRoleAnchor;
-//    [self enterRoomWithParam:param];
+//        _cppWindow = [[TRTCCppWindow alloc]initWithWindowNibName:NSStringFromClass([TRTCCppWindow class])];
+//        [_cppWindow loginWithRoomID:roomID userid:userID];
+//        [_cppWindow showWindow:nil];
+//        [_cppWindow.window orderFront:nil];
+    TRTCParams *param = [[TRTCParams alloc] init];
+    param.sdkAppId = sdkAppID;
+    param.userId = userID;
+    param.userSig = [GenerateTestUserSig genTestUserSig:userID];
+    param.roomId = (UInt32)roomID.integerValue;
+    param.role = TRTCSettingWindowController.isAudience ? TRTCRoleAudience : TRTCRoleAnchor;
+    [self enterRoomWithParam:param];
 }
 
 @end
