@@ -7,4 +7,4 @@
 //
 
 
-@import TXLiteAVSDK_TRTC_Mac;
+#import <TXLiteAVSDK_TRTC_Mac/TRTCCloud.h>

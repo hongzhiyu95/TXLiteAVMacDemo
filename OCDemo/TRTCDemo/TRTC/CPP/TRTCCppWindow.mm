@@ -7,42 +7,76 @@
 //
 
 #import "TRTCCppWindow.h"
-#include <iostream>
-#include <TXLiteAVSDK_TRTC_Mac/cpp_interface/ITRTCCloud.h>
-//#include "TRTCCloudDef.h"
-#include "GenerateTestUserSig.h"
+#import <iostream>
+#import <TXLiteAVSDK_TRTC_Mac/cpp_interface/ITRTCCloud.h>
+#import <TXLiteAVSDK_TRTC_Mac/TRTCCloud.h>
+#import "GenerateTestUserSig.h"
 #import "TXCaptureSourceWindowController.h"
+#import "TRTCUserManager.h"
+#define kButtonTitleAttr @{ NSForegroundColorAttributeName : [NSColor whiteColor] }
 
-using namespace liteav;
+
 using namespace std;
 //using namespace liteav;
-class  MyTRTCCoudCallBack : public ITRTCAudioFrameCallback{
+static NSString * const AudioIcon[2] = {@"main_tool_audio_on", @"main_tool_audio_off"};
+class  MyTRTCCoudAudioFrameCallBack : public liteav::ITRTCAudioFrameCallback{
 private:
     int roomId;
     TRTCCppWindow *manager;
 public:
-    void onCapturedRawAudioFrame(TRTCAudioFrame* frame);
-    void onLocalProcessedAudioFrame(TRTCAudioFrame* frame);
-    void onPlayAudioFrame(TRTCAudioFrame* frame, const char* userId);
-    void onMixedPlayAudioFrame(TRTCAudioFrame* frame);
-    void onRenderVideoFrame(const char* userId, TRTCVideoStreamType streamType, TRTCVideoFrame* frame);
+    void onCapturedRawAudioFrame(liteav::TRTCAudioFrame* frame);
+    void onLocalProcessedAudioFrame(liteav::TRTCAudioFrame* frame);
+    void onPlayAudioFrame(liteav::TRTCAudioFrame* frame, const char* userId);
+    void onMixedPlayAudioFrame(liteav::TRTCAudioFrame* frame);
+    void onRenderVideoFrame(const char* userId, liteav::TRTCVideoStreamType streamType, liteav::TRTCVideoFrame* frame);
 };
-class  MyVideoRenderCallBack : public ITRTCVideoRenderCallback{
+class  MyVideoRenderCallBack : public liteav::ITRTCVideoRenderCallback{
 private:
     int roomId;
     TRTCCppWindow *manager;
 public:
-    void onRenderVideoFrame(const char* userId, TRTCVideoStreamType streamType, TRTCVideoFrame* frame);
+    void onRenderVideoFrame(const char* userId, liteav::TRTCVideoStreamType streamType, liteav::TRTCVideoFrame* frame);
 };
-@interface TRTCCppWindow ()<NSWindowDelegate>
+class  MyTRTCCoudCallBack : public liteav::ITRTCCloudCallback{
+private:
+    int roomId;
+    TRTCCppWindow *manager;
+public:
+    void onError(TXLiteAVError errCode, const char *errMsg, void *extraInfo);
+    void onWarning(TXLiteAVWarning warningCode, const char *warningMsg, void *extraInfo);
+    void onEnterRoom(int result);
+    void onExitRoom(int reason);
+    void onSwitchRole(TXLiteAVError errCode, const char* errMsg);
+    void onConnectOtherRoom(const char* userId, TXLiteAVError errCode, const char* errMsg);
+    void onSwitchRoom(TXLiteAVError errCode, const char* errMsg);
+    void onRemoteUserEnterRoom(const char* userId);
+    void onRemoteUserLeaveRoom(const char* userId, int reason);
+    void onUserVideoAvailable(const char* userId, bool available);
+    void onUserSubStreamAvailable(const char* userId, bool available);
+    void onUserAudioAvailable(const char* userId, bool available);
+    void onFirstVideoFrame(const char* userId, const   liteav::TRTCVideoStreamType streamType, const int width, const int height);
+    void onNetworkQuality( liteav::TRTCQualityInfo localQuality,  liteav::TRTCQualityInfo* remoteQuality, uint32_t remoteQualityCount);
+    void onStatistics(const  liteav::TRTCStatistics& statis);
+    void onUserVoiceVolume( liteav::TRTCVolumeInfo* userVolumes, uint32_t userVolumesCount, uint32_t totalVolume);
+    void onRecvCustomCmdMsg(const char* userId, int32_t cmdID, uint32_t seq, const uint8_t* message, uint32_t messageSize);
+    void onMissCustomCmdMsg(const char* userId, int32_t cmdID, int32_t errCode, int32_t missed);
+    void onRecvSEIMsg(const char* userId, const uint8_t* message, uint32_t messageSize);
+    
+};
+@interface TRTCCppWindow ()<NSWindowDelegate,TRTCCloudDelegate>
 @property (weak) IBOutlet NSView *videoView;
+@property (nonatomic, strong) TRTCUserManager *userManager;
 @property(nonatomic,strong) TXCaptureSourceWindowController *captureSourceWindowController;
+@property (strong ,nonatomic) NSMutableDictionary* remoteUserViewDic;
 @end
 
+
 @implementation TRTCCppWindow {
-    ITRTCCloud *_trtc;
-    MyTRTCCoudCallBack *_trtcCloudCallBack;
+    
+    MyTRTCCoudAudioFrameCallBack *_trtcCloudAudioFrameCallBack;
     MyVideoRenderCallBack *_videoRenderCallBack;
+    MyTRTCCoudCallBack *_cloudDelegate;
+    liteav:: ITRTCCloud *_trtc;
 }
 
 
@@ -50,23 +84,27 @@ public:
     return [super initWithCoder:coder];
 }
 -(void)loginWithRoomID:(NSString *)roomId userid:(NSString *)userid{
-    _trtc = ITRTCCloud::getTRTCShareInstance();
-    _trtcCloudCallBack = new MyTRTCCoudCallBack();
+    _trtc = liteav::ITRTCCloud::getTRTCShareInstance();
+    
+    _trtcCloudAudioFrameCallBack = new MyTRTCCoudAudioFrameCallBack();
     _videoRenderCallBack = new MyVideoRenderCallBack();
-    TRTCParams params =  liteav::TRTCParams();
-    params.role = TRTCRoleAnchor;
+    _cloudDelegate = new MyTRTCCoudCallBack();
+    liteav:: TRTCParams params =  liteav::TRTCParams();
+    params.role = liteav::TRTCRoleAnchor;
     params.roomId = [roomId intValue];
     
     params.sdkAppId = _SDKAppID;
     params.userId = [userid cStringUsingEncoding:NSUTF8StringEncoding];
     const char* userSig =  [[GenerateTestUserSig genTestUserSig:userid] cStringUsingEncoding:NSUTF8StringEncoding];
     params.userSig = userSig;
-    _trtc->enterRoom(params,TRTCAppSceneLIVE);
+    _trtc->enterRoom(params,liteav::TRTCAppSceneLIVE);
     _trtc->startLocalPreview((__bridge void*)self.videoView);
-    _trtc->startLocalAudio(TRTCAudioQualityMusic);
-    _trtc->setAudioFrameCallback(_trtcCloudCallBack);
-
-    _trtc -> setLocalVideoRenderCallback(TRTCVideoPixelFormat_BGRA32, TRTCVideoBufferType_Buffer, _videoRenderCallBack);
+    _trtc->startLocalAudio(liteav::TRTCAudioQualityMusic);
+    _trtc->setAudioFrameCallback(_trtcCloudAudioFrameCallBack);
+    _trtc->addCallback(_cloudDelegate);
+    _trtc -> setLocalVideoRenderCallback(liteav::TRTCVideoPixelFormat_BGRA32, liteav::TRTCVideoBufferType_Buffer, _videoRenderCallBack);
+    [TRTCCloud sharedInstance].delegate = self;
+    self.userManager = [[TRTCUserManager alloc]initWithUserId:[NSString stringWithCString:params.userId encoding:NSUTF8StringEncoding]];
  //   _trtc -> getDeviceManager()->enableFollowingDefaultAudioDevice(<#TXMediaDeviceType type#>, <#bool enable#>)
 //    RECT rect ;
 //    rect.left = 0;
@@ -83,19 +121,79 @@ public:
 //    _trtc -> startScreenCapture(nullptr, TRTCVideoStreamTypeSub, nil);
 //    self.captureSourceWindowController = [[TXCaptureSourceWindowController alloc] initWithTRTCCloud:nil];
 }
+-(void)onUserVideoAvailable:(NSString *)userId available:(BOOL)available{
+    NSLog(@"[YT]---ObjC callbak--onUserVideoAvailable");
+    if (userId) {
+        NSView *remoteRenderView = self.remoteUserViewDic [userId];
+        if (available) {
+            if (!remoteRenderView) {
+                NSInteger index = self.remoteUserViewDic.allKeys.count;
+                NSInteger line = 1;
+              //  NSInteger curIndex = 0;
+                if(index>5){
+                    
+                    index =0;
+                    line = 2;
+                }
+                CGFloat kRenderViewWidth = self.window.contentView.frame.size.width/5;
+                CGFloat kRenderViewHeight = (self.window.contentView.frame.size.width/5)/9*16;
+                remoteRenderView = [[NSView alloc]initWithFrame:NSMakeRect(index*kRenderViewWidth, line*kRenderViewHeight, kRenderViewWidth, kRenderViewHeight)];
+                [self.videoView addSubview:remoteRenderView];
+                self.remoteUserViewDic[userId] = remoteRenderView;
+                _trtc->startRemoteView([userId UTF8String],  liteav::TRTCVideoStreamTypeBig, (__bridge void *)remoteRenderView);
+            }
+          
+        }else{
+            if (remoteRenderView){
+                _trtc->stopRemoteView([userId UTF8String], liteav::TRTCVideoStreamTypeBig);
+                [remoteRenderView removeFromSuperview];
+                self.remoteUserViewDic[userId] = nil;
+                [self updateRemoteViews];
+            }
+        }
+    }
+}
+-(void)updateRemoteViews{
+    if (self.remoteUserViewDic.allValues.count>0) {
+        NSInteger curIndex = 0;
+        NSInteger curLine = 1;
+        CGFloat kRenderViewWidth = self.window.contentView.frame.size.width/5;
+        CGFloat kRenderViewHeight = (self.window.contentView.frame.size.width/5)/9*16;
+        for (NSView *renderView in self.remoteUserViewDic.allValues) {
+            if(curIndex==5){
+                curLine  = 2;
+                curIndex = 0;
+            }
+            [renderView setFrame:NSMakeRect(curIndex*kRenderViewWidth, curLine*kRenderViewHeight, kRenderViewWidth, kRenderViewHeight)];
+            curIndex ++;
+            
+        }
+    }
+   
+    
+}
+#pragma mark 静音
 
+- (IBAction)muteLocalAudioClicked:(NSButton*)button {
+    button.image = [NSImage imageNamed:AudioIcon[button.state]];
+    button.attributedTitle = [[NSAttributedString alloc] initWithString:@[@"静音", @"解除静音"][button.state]
+                                                             attributes:kButtonTitleAttr];
+    _trtc->muteLocalAudio(button.state);
+    
+}
+#pragma mark 屏幕分享点击
 - (IBAction)startScreenCapture:(id)sender {
     __weak TRTCCppWindow *wself = self;
     self.captureSourceWindowController = [[TXCaptureSourceWindowController alloc] initWithTRTCCloud:nil];
-    SIZE tbSize;
+    liteav::SIZE tbSize;
     tbSize.width = 180;
     tbSize.height = 180;
-    SIZE icSize;
+    liteav::SIZE icSize;
     icSize.width = 180;
     icSize.height = 180;
-    ITRTCScreenCaptureSourceList *sourceList = _trtc->getScreenCaptureSources(tbSize, icSize);
+    liteav:: ITRTCScreenCaptureSourceList *sourceList = _trtc->getScreenCaptureSources(tbSize, icSize);
     for (int index = 0; index < sourceList->getCount() ;index ++) {
-        TRTCScreenCaptureSourceInfo source = sourceList->getSourceInfo(index);
+        liteav::TRTCScreenCaptureSourceInfo source = sourceList->getSourceInfo(index);
         cout<<"---YT--"<<source.sourceId<<endl;
     }
     self.captureSourceWindowController.onSelectSourceIndex = ^(int index) {
@@ -103,13 +201,13 @@ public:
         if (!self) return;
         _trtc->stopScreenCapture();
    
-        TRTCScreenCaptureSourceInfo source;
+        liteav::TRTCScreenCaptureSourceInfo source;
         source = sourceList->getSourceInfo(index);
         cout<<"---YT--"<<source.sourceId<<endl;
-        TRTCScreenCaptureProperty ppt ;
+        liteav::TRTCScreenCaptureProperty ppt ;
         ppt.enableCaptureMouse = true;
         ppt.enableHighLight = true;
-        RECT rect ;
+        liteav::RECT rect ;
         rect.left = 0;
         rect.right = 0;
         rect.top = 0;
@@ -121,9 +219,9 @@ public:
                 self->_trtc->selectScreenCaptureTarget(source, rect, ppt);
             }
             if (self.captureSourceWindowController.usesBigStream) {
-                self->_trtc->startScreenCapture(nullptr, TRTCVideoStreamTypeBig, nullptr);
+                self->_trtc->startScreenCapture(nullptr, liteav::TRTCVideoStreamTypeBig, nullptr);
             } else {
-                self->_trtc->startScreenCapture(nullptr, TRTCVideoStreamTypeSub, nullptr);
+                self->_trtc->startScreenCapture(nullptr, liteav::TRTCVideoStreamTypeSub, nullptr);
             }
         }
         [self.window endSheet:self.captureSourceWindowController.window];
@@ -138,35 +236,116 @@ public:
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    
+    _remoteUserViewDic = [NSMutableDictionary dictionary];
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 -(void)windowWillClose:(NSNotification *)notification{
     _trtc->stopLocalAudio();
     _trtc->exitRoom();
     _trtc->destroyTRTCShareInstance();
-    delete  _trtcCloudCallBack;
+    delete  _trtcCloudAudioFrameCallBack;
+}
+#pragma mark -trtcCallBack回调处理
+void MyTRTCCoudCallBack::onError(TXLiteAVError errCode, const char *errMsg, void *extraInfo) {
+ 
+}
+
+void MyTRTCCoudCallBack::onWarning(TXLiteAVWarning warningCode, const char *warningMsg, void *extraInfo) {
+  
+}
+
+void MyTRTCCoudCallBack::onEnterRoom(int result) {
+  
+}
+
+void MyTRTCCoudCallBack::onExitRoom(int reason) {
+   
+}
+
+void MyTRTCCoudCallBack::onSwitchRole(TXLiteAVError errCode, const char* errMsg) {
+   
+}
+
+void MyTRTCCoudCallBack::onConnectOtherRoom(const char* userId, TXLiteAVError errCode, const char* errMsg) {
+ 
+}
+
+void MyTRTCCoudCallBack::onSwitchRoom(TXLiteAVError errCode, const char* errMsg) {
+  
+}
+
+void MyTRTCCoudCallBack::onRemoteUserEnterRoom(const char* userId) {
+ 
+}
+
+void MyTRTCCoudCallBack::onRemoteUserLeaveRoom(const char* userId, int reason) {
+   
+}
+
+void MyTRTCCoudCallBack::onUserVideoAvailable(const char* userId, bool available) {
+    NSLog(@"[YT]---cpp callbak--onUserVideoAvailable");
+   
+}
+
+void MyTRTCCoudCallBack::onUserSubStreamAvailable(const char* userId, bool available) {
+    
+}
+
+void MyTRTCCoudCallBack::onUserAudioAvailable(const char* userId, bool available) {
+   
+}
+
+void MyTRTCCoudCallBack::onFirstVideoFrame(const char* userId, const  liteav::TRTCVideoStreamType streamType, const int width, const int height) {
+  
+}
+
+void MyTRTCCoudCallBack::onNetworkQuality( liteav::TRTCQualityInfo localQuality,  liteav::TRTCQualityInfo* remoteQuality, uint32_t remoteQualityCount) {
+    
+ 
+}
+
+void MyTRTCCoudCallBack::onStatistics(const  liteav::TRTCStatistics& statics) {
+ 
+}
+
+void MyTRTCCoudCallBack::onUserVoiceVolume( liteav::TRTCVolumeInfo* userVolumes, uint32_t userVolumesCount, uint32_t totalVolume) {
+
+}
+
+void MyTRTCCoudCallBack::onRecvCustomCmdMsg(const char* userId, int32_t cmdID, uint32_t seq, const uint8_t* message, uint32_t messageSize) {
+
+}
+
+void MyTRTCCoudCallBack::onMissCustomCmdMsg(const char* userId, int32_t cmdID, int32_t errCode, int32_t missed) {
+ 
+}
+
+void MyTRTCCoudCallBack::onRecvSEIMsg(const char* userId, const uint8_t* message, uint32_t messageSize) {
+    NSData *msgData = [[NSData alloc] initWithBytes:message length:messageSize];
+ 
 }
 
 
 @end
-void MyTRTCCoudCallBack::onLocalProcessedAudioFrame(TRTCAudioFrame *frame){
+void MyTRTCCoudAudioFrameCallBack::onLocalProcessedAudioFrame(liteav::TRTCAudioFrame *frame){
     cout<<"onLocalProcessedAudioFrame---"<<endl;
 }
-void MyTRTCCoudCallBack::onCapturedRawAudioFrame(TRTCAudioFrame* frame){
+void MyTRTCCoudAudioFrameCallBack::onCapturedRawAudioFrame(liteav::TRTCAudioFrame* frame){
     
 }
-void MyTRTCCoudCallBack::onPlayAudioFrame(TRTCAudioFrame* frame, const char* userId){
+void MyTRTCCoudAudioFrameCallBack::onPlayAudioFrame(liteav::TRTCAudioFrame* frame, const char* userId){
     
 }
-void MyTRTCCoudCallBack::onMixedPlayAudioFrame(TRTCAudioFrame* frame){
+void MyTRTCCoudAudioFrameCallBack::onMixedPlayAudioFrame(liteav::TRTCAudioFrame* frame){
     
 }
-void MyVideoRenderCallBack::onRenderVideoFrame(const char *userId, TRTCVideoStreamType streamType, TRTCVideoFrame *frame){
+void MyVideoRenderCallBack::onRenderVideoFrame(const char *userId, liteav::TRTCVideoStreamType streamType, liteav::TRTCVideoFrame *frame){
     if (streamType == TRTCVideoStreamTypeSub) {
         cout<<"onRenderVideoFrame---"<<endl;
     }
 }
+
+
 //MyTRTCCoudCallBack::MyTRTCCoudCallBack(int roomid, TRTCCppWindow *manage){
 //    roomid = roomid;
 //    manage = manage;

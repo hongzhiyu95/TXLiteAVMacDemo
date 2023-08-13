@@ -19,6 +19,7 @@
 		06D5A6B524160A6500296793 /* bgm_demo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 06D5A6B324160A6500296793 /* bgm_demo.mp3 */; };
 		33018E202A8785EF006E8F5D /* TRTCCppWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 33018E1E2A8785EF006E8F5D /* TRTCCppWindow.mm */; };
 		33018E212A8785EF006E8F5D /* TRTCCppWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33018E1F2A8785EF006E8F5D /* TRTCCppWindow.xib */; };
+		33018E272A88CD52006E8F5D /* TRTCUserManagerCpp.m in Sources */ = {isa = PBXBuildFile; fileRef = 33018E262A88CD52006E8F5D /* TRTCUserManagerCpp.m */; };
 		33443F6E2A8752A4004C8E99 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A0933EB9232111B400565F64 /* libc++.tbd */; };
 		33443F6F2A8752AD004C8E99 /* ScreenCaptureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6770F8E296E69CB009B32F4 /* ScreenCaptureKit.framework */; };
 		33443F712A8752B7004C8E99 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33443F702A8752B7004C8E99 /* CoreServices.framework */; };
@@ -90,6 +91,8 @@
 		33018E1D2A8785EF006E8F5D /* TRTCCppWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTCCppWindow.h; sourceTree = "<group>"; };
 		33018E1E2A8785EF006E8F5D /* TRTCCppWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TRTCCppWindow.mm; sourceTree = "<group>"; };
 		33018E1F2A8785EF006E8F5D /* TRTCCppWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRTCCppWindow.xib; sourceTree = "<group>"; };
+		33018E252A88CD52006E8F5D /* TRTCUserManagerCpp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRTCUserManagerCpp.h; sourceTree = "<group>"; };
+		33018E262A88CD52006E8F5D /* TRTCUserManagerCpp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TRTCUserManagerCpp.m; sourceTree = "<group>"; };
 		33443F702A8752B7004C8E99 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		33443F772A8752C5004C8E99 /* TXLiteAVSDK_TRTC_Mac.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TXLiteAVSDK_TRTC_Mac.xcframework; path = ../SDK/TXLiteAVSDK_TRTC_Mac.xcframework; sourceTree = "<group>"; };
 		33443F7B2A875A04004C8E99 /* GenerateTestUserSig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateTestUserSig.m; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				33018E1D2A8785EF006E8F5D /* TRTCCppWindow.h */,
 				33018E1E2A8785EF006E8F5D /* TRTCCppWindow.mm */,
 				33018E1F2A8785EF006E8F5D /* TRTCCppWindow.xib */,
+				33018E252A88CD52006E8F5D /* TRTCUserManagerCpp.h */,
+				33018E262A88CD52006E8F5D /* TRTCUserManagerCpp.m */,
 			);
 			path = CPP;
 			sourceTree = "<group>";
@@ -464,6 +469,7 @@
 				06D5A6AA24160A4A00296793 /* TXRenderView.m in Sources */,
 				457A707D2200814E00DD193B /* TXCaptureSourceCollectionHeaderView.m in Sources */,
 				06D5A6AC24160A4A00296793 /* TRTCMemberListView.m in Sources */,
+				33018E272A88CD52006E8F5D /* TRTCUserManagerCpp.m in Sources */,
 				45AD95BF21D72C0F007B2EAF /* TRTCMainWindowController.m in Sources */,
 				45F96FC9223296E600E861EC /* TRTCApp.m in Sources */,
 				D689A93121CC97F300C7C618 /* AppDelegate.m in Sources */,
