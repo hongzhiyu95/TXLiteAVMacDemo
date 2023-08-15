@@ -15,12 +15,13 @@
 #import "TRTCUserManager.h"
 #import "HoverView.h"
 #import "TXCppRenderView.h"
-#define kButtonTitleAttr @{ NSForegroundColorAttributeName : [NSColor whiteColor] }
+#define kButtonTitleAttr @{ NSForegroundColorAttributeName : [NSColor grayColor] }
 
 
 using namespace std;
 //using namespace liteav;
 static NSString * const AudioIcon[2] = {@"main_tool_audio_on", @"main_tool_audio_off"};
+static NSString * const VideoIcon[2] = {@"main_tool_video_on", @"main_tool_video_off"};
 class  MyTRTCCoudAudioFrameCallBack : public liteav::ITRTCAudioFrameCallback{
 private:
     int roomId;
@@ -148,11 +149,13 @@ public:
 //    _trtc -> startScreenCapture(nullptr, TRTCVideoStreamTypeSub, nil);
 //    self.captureSourceWindowController = [[TXCaptureSourceWindowController alloc] initWithTRTCCloud:nil];
    // [[[TRTCCloud sharedInstance]getDeviceManager]getDevicesList:TXMediaDeviceTypeAudioInput];
-    self.micArr = [self _configDeviceArrWithCppDeviceList:_trtc->getDeviceManager()->getDevicesList(liteav::TXMediaDeviceTypeMic)];
-    self.speakerArr = [self _configDeviceArrWithCppDeviceList:_trtc->getDeviceManager()->getDevicesList(liteav::TXMediaDeviceTypeSpeaker)];
+//    self.micArr = [self _configDeviceArrWithCppDeviceList:_trtc->getDeviceManager()->getDevicesList(liteav::TXMediaDeviceTypeMic)];
+//    self.speakerArr = [self _configDeviceArrWithCppDeviceList:_trtc->getDeviceManager()->getDevicesList(liteav::TXMediaDeviceTypeSpeaker)];
     
     [self _configPopUpMenu:_audioSelectView];
+    [self _configPopUpMenu:_videoSelectView];
     self.audioSelectView.frame = CGRectMake(self.audioSelectView.frame.origin.x, self.audioSelectView.frame.origin.y, self.audioSelectView.frame.size.width, (self.micArr.count+self.speakerArr.count+1)*26);
+    self.videoSelectView.frame = CGRectMake(self.videoSelectView.frame.origin.x, self.videoSelectView.frame.origin.y, self.videoSelectView.frame.size.width, (self.micArr.count+1)*26);
     
 }
 -(NSMutableArray *)_configDeviceArrWithCppDeviceList:(liteav::ITXDeviceCollection*)cppDeciveCollection{
@@ -241,14 +244,23 @@ public:
     
 }
 - (void)mouseDown:(NSEvent *)event {
-   // [self.videoSelectView enclosingScrollView].hidden = YES;
+    [self.videoSelectView enclosingScrollView].hidden = YES;
     [self.audioSelectView enclosingScrollView].hidden = YES;
 }
-
+- (IBAction)onClickCameraSource:(id)sender {
+    [self.videoSelectView enclosingScrollView].hidden = ![self.videoSelectView enclosingScrollView].hidden;
+    if ([self.videoSelectView enclosingScrollView].hidden == NO) {
+        [self.audioSelectView enclosingScrollView].hidden = YES;
+    }
+    [self.cameraArr removeAllObjects];
+    self.cameraArr = [self _configDeviceArrWithCppDeviceList:_trtc->getDeviceManager()->getDevicesList(liteav::TXMediaDeviceTypeCamera)];
+    [self.cameraArr insertObject:@"选择摄像头" atIndex:0];
+    [self.videoSelectView reloadData];
+}
 - (IBAction)micDeviceButtonClicked:(NSButton *)button {
     [self.audioSelectView enclosingScrollView].hidden = ![self.audioSelectView enclosingScrollView].hidden;
     if ([self.audioSelectView enclosingScrollView].hidden == NO) {
-        //[self.videoSelectView enclosingScrollView].hidden = YES;
+        [self.videoSelectView enclosingScrollView].hidden = YES;
     }
     [self.micArr removeAllObjects];
     [self.speakerArr removeAllObjects];
@@ -259,6 +271,28 @@ public:
     [self.micArr insertObject:@"选择麦克风" atIndex:0];
     [self.speakerArr insertObject:@"选择扬声器" atIndex:0];
     [self.audioSelectView reloadData];
+}
+- (IBAction)onClickVideoMute:(NSButton *)button {
+    button.image = [NSImage imageNamed:VideoIcon[button.state]];
+    button.attributedTitle = [[NSAttributedString alloc] initWithString:@[@"停止视频", @"开启视频"][button.state]
+                                                             attributes:kButtonTitleAttr];
+    _trtc->muteLocalVideo(liteav::TRTCVideoStreamTypeBig,  button.state != NSControlStateValueOn);
+}
+- (IBAction)onClickCameraSourceTableItem:(id)sender {
+    NSTableView *tableView = sender;
+    NSInteger row = [tableView selectedRow];
+    if (row < 0) return;
+    NSMutableArray *cameraArr = [NSMutableArray arrayWithArray:self.cameraArr];
+    [cameraArr addObject:@"视频设置"];
+    id object = [cameraArr objectAtIndex:row];
+    if ([object isKindOfClass:[TXLiteAVDemoDeviceInfo class]])  {
+        TXLiteAVDemoDeviceInfo *source = (TXLiteAVDemoDeviceInfo *)object;
+        if ([self.cameraArr containsObject:object] ) {
+            _trtc->getDeviceManager()->setCurrentDevice(liteav::TXMediaDeviceTypeMic, [source.deviceID UTF8String]);
+        }
+    }
+    [self.audioSelectView enclosingScrollView].hidden = YES;
+    [self.videoSelectView enclosingScrollView].hidden = YES;
 }
 - (IBAction)onClickAudioSourceTableItem:(id)sender{
     NSTableView *tableView = sender;

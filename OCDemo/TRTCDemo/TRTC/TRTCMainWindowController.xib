@@ -299,13 +299,13 @@
                                         </customSpacing>
                                     </stackView>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="102" horizontalPageScroll="10" verticalLineScroll="102" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aND-RX-neQ" customClass="TRTCVideoListView">
-                                        <rect key="frame" x="1924" y="253" width="200" height="122"/>
+                                        <rect key="frame" x="1924" y="254" width="200" height="120"/>
                                         <clipView key="contentView" id="3j8-gC-Swm">
-                                            <rect key="frame" x="1" y="1" width="198" height="120"/>
+                                            <rect key="frame" x="1" y="1" width="198" height="118"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="100" rowSizeStyle="automatic" viewBased="YES" id="hfj-Qg-5zu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="120"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="118"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -439,19 +439,19 @@
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="67" horizontalPageScroll="10" verticalLineScroll="67" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7al-Am-pju">
-                                        <rect key="frame" x="0.0" y="60" width="300" height="456"/>
+                                        <rect key="frame" x="0.0" y="60" width="300" height="404"/>
                                         <clipView key="contentView" id="6HS-sP-2Wb">
-                                            <rect key="frame" x="1" y="1" width="298" height="454"/>
+                                            <rect key="frame" x="1" y="1" width="298" height="402"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="65" rowSizeStyle="automatic" headerView="Isq-U5-3vz" viewBased="YES" id="MC7-q1-GT2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="298" height="429"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="298" height="377"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="286" minWidth="40" maxWidth="1000" id="lIA-eh-1U1">
+                                                        <tableColumn width="257" minWidth="40" maxWidth="1000" id="lIA-eh-1U1">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -464,7 +464,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="TRTCMemberListCell" id="de6-Hd-3ZF" customClass="TRTCMemberListCell">
-                                                                    <rect key="frame" x="1" y="1" width="295" height="65"/>
+                                                                    <rect key="frame" x="1" y="1" width="266" height="65"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9f9-K7-kjB">
@@ -491,7 +491,7 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="csT-c3-fai">
-                                                                            <rect key="frame" x="199" y="19" width="28" height="28"/>
+                                                                            <rect key="frame" x="170" y="19" width="28" height="28"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="28" id="mvD-Lw-OoP"/>
                                                                                 <constraint firstAttribute="width" constant="28" id="nZ8-d1-3XC"/>
@@ -505,7 +505,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="Wa4-9g-XTO">
-                                                                            <rect key="frame" x="247" y="19" width="28" height="28"/>
+                                                                            <rect key="frame" x="218" y="19" width="28" height="28"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="28" id="JyS-WS-LNU"/>
                                                                                 <constraint firstAttribute="width" constant="28" id="ymt-mP-MYa"/>
