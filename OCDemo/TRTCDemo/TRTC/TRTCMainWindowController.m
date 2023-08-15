@@ -380,6 +380,12 @@ typedef NS_ENUM(NSUInteger, LayoutStyle) {
                 [self.trtcEngine startScreenCapture:nil];
             }
         }
+        if (self.captureSourceWindowController.isloopback) {
+            [self.trtcEngine startSystemAudioLoopback];
+        }
+        else{
+            [self.trtcEngine stopSystemAudioLoopback];
+        }
         self.screenCaptureInfo = source;
         [self updateWindowTitle];
         [self.window endSheet:self.captureSourceWindowController.window];

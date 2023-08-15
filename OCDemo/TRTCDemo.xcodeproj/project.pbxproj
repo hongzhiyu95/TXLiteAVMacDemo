@@ -20,6 +20,8 @@
 		33018E202A8785EF006E8F5D /* TRTCCppWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 33018E1E2A8785EF006E8F5D /* TRTCCppWindow.mm */; };
 		33018E212A8785EF006E8F5D /* TRTCCppWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33018E1F2A8785EF006E8F5D /* TRTCCppWindow.xib */; };
 		33018E272A88CD52006E8F5D /* TRTCUserManagerCpp.m in Sources */ = {isa = PBXBuildFile; fileRef = 33018E262A88CD52006E8F5D /* TRTCUserManagerCpp.m */; };
+		334282E62A8B72BF0023FDCF /* TXLiteAVSDK_TRTC_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6770F7D296E6992009B32F4 /* TXLiteAVSDK_TRTC_Mac.framework */; };
+		334282E92A8B72E40023FDCF /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334282E82A8B72E40023FDCF /* MetalKit.framework */; };
 		33443F6E2A8752A4004C8E99 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A0933EB9232111B400565F64 /* libc++.tbd */; };
 		33443F6F2A8752AD004C8E99 /* ScreenCaptureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6770F8E296E69CB009B32F4 /* ScreenCaptureKit.framework */; };
 		33443F712A8752B7004C8E99 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33443F702A8752B7004C8E99 /* CoreServices.framework */; };
@@ -27,8 +29,8 @@
 		33443F732A8752C5004C8E99 /* TXFFmpeg.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6770F80296E6992009B32F4 /* TXFFmpeg.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		33443F742A8752C5004C8E99 /* TXSoundTouch.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6770F7E296E6992009B32F4 /* TXSoundTouch.xcframework */; };
 		33443F752A8752C5004C8E99 /* TXSoundTouch.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6770F7E296E6992009B32F4 /* TXSoundTouch.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		33443F782A8752C5004C8E99 /* TXLiteAVSDK_TRTC_Mac.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33443F772A8752C5004C8E99 /* TXLiteAVSDK_TRTC_Mac.xcframework */; };
 		33443F7D2A875A04004C8E99 /* GenerateTestUserSig.m in Sources */ = {isa = PBXBuildFile; fileRef = 33443F7B2A875A04004C8E99 /* GenerateTestUserSig.m */; };
+		33E593632A8A1D45005F8181 /* TXCppRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E593622A8A1D45005F8181 /* TXCppRenderView.m */; };
 		453167F221E45560007A91CB /* TRTCNewWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453167EF21E4555F007A91CB /* TRTCNewWindowController.m */; };
 		453167F321E45560007A91CB /* TRTCNewWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453167F021E4555F007A91CB /* TRTCNewWindowController.xib */; };
 		457A707B2200814E00DD193B /* CaptureSourceCollectionItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457A70702200814D00DD193B /* CaptureSourceCollectionItem.xib */; };
@@ -93,10 +95,13 @@
 		33018E1F2A8785EF006E8F5D /* TRTCCppWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRTCCppWindow.xib; sourceTree = "<group>"; };
 		33018E252A88CD52006E8F5D /* TRTCUserManagerCpp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRTCUserManagerCpp.h; sourceTree = "<group>"; };
 		33018E262A88CD52006E8F5D /* TRTCUserManagerCpp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TRTCUserManagerCpp.m; sourceTree = "<group>"; };
+		334282E82A8B72E40023FDCF /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		33443F702A8752B7004C8E99 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		33443F772A8752C5004C8E99 /* TXLiteAVSDK_TRTC_Mac.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TXLiteAVSDK_TRTC_Mac.xcframework; path = ../SDK/TXLiteAVSDK_TRTC_Mac.xcframework; sourceTree = "<group>"; };
 		33443F7B2A875A04004C8E99 /* GenerateTestUserSig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateTestUserSig.m; sourceTree = "<group>"; };
 		33443F7C2A875A04004C8E99 /* GenerateTestUserSig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenerateTestUserSig.h; sourceTree = "<group>"; };
+		33E593612A8A1D45005F8181 /* TXCppRenderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCppRenderView.h; sourceTree = "<group>"; };
+		33E593622A8A1D45005F8181 /* TXCppRenderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCppRenderView.m; sourceTree = "<group>"; };
 		453167EF21E4555F007A91CB /* TRTCNewWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTCNewWindowController.m; sourceTree = "<group>"; };
 		453167F021E4555F007A91CB /* TRTCNewWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRTCNewWindowController.xib; sourceTree = "<group>"; };
 		453167F121E4555F007A91CB /* TRTCNewWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTCNewWindowController.h; sourceTree = "<group>"; };
@@ -147,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6770F91296E6A1F009B32F4 /* SystemConfiguration.framework in Frameworks */,
+				334282E62A8B72BF0023FDCF /* TXLiteAVSDK_TRTC_Mac.framework in Frameworks */,
 				FD7773F12493EC690025AD65 /* AudioUnit.framework in Frameworks */,
 				33443F722A8752C5004C8E99 /* TXFFmpeg.xcframework in Frameworks */,
 				33443F742A8752C5004C8E99 /* TXSoundTouch.xcframework in Frameworks */,
@@ -154,9 +160,9 @@
 				33443F712A8752B7004C8E99 /* CoreServices.framework in Frameworks */,
 				C6770F8F296E69CB009B32F4 /* ScreenCaptureKit.framework in Frameworks */,
 				33443F6F2A8752AD004C8E99 /* ScreenCaptureKit.framework in Frameworks */,
+				334282E92A8B72E40023FDCF /* MetalKit.framework in Frameworks */,
 				FD7773EF2493EC610025AD65 /* Accelerate.framework in Frameworks */,
 				A0933EBC232111BA00565F64 /* OpenAL.framework in Frameworks */,
-				33443F782A8752C5004C8E99 /* TXLiteAVSDK_TRTC_Mac.xcframework in Frameworks */,
 				A0933EBA232111B400565F64 /* libc++.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +226,8 @@
 				33018E1D2A8785EF006E8F5D /* TRTCCppWindow.h */,
 				33018E1E2A8785EF006E8F5D /* TRTCCppWindow.mm */,
 				33018E1F2A8785EF006E8F5D /* TRTCCppWindow.xib */,
+				33E593612A8A1D45005F8181 /* TXCppRenderView.h */,
+				33E593622A8A1D45005F8181 /* TXCppRenderView.m */,
 				33018E252A88CD52006E8F5D /* TRTCUserManagerCpp.h */,
 				33018E262A88CD52006E8F5D /* TRTCUserManagerCpp.m */,
 			);
@@ -338,6 +346,7 @@
 		D689A96621CCADD600C7C618 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				334282E82A8B72E40023FDCF /* MetalKit.framework */,
 				33443F772A8752C5004C8E99 /* TXLiteAVSDK_TRTC_Mac.xcframework */,
 				33443F702A8752B7004C8E99 /* CoreServices.framework */,
 				C6770F90296E6A1E009B32F4 /* SystemConfiguration.framework */,
@@ -477,6 +486,7 @@
 				33018E202A8785EF006E8F5D /* TRTCCppWindow.mm in Sources */,
 				457A707F2200814E00DD193B /* CaptureSourceCollectionItem.m in Sources */,
 				06D5A6AF24160A4A00296793 /* TRTCVideoCell.m in Sources */,
+				33E593632A8A1D45005F8181 /* TXCppRenderView.m in Sources */,
 				453167F221E45560007A91CB /* TRTCNewWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -625,6 +635,7 @@
 					"$(PROJECT_DIR)/../SDK/TXLiteAVSDK_TRTC_Mac.framework/Headers",
 				);
 				INFOPLIST_FILE = TRTCDemo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LiteAVMacDemo;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -658,6 +669,7 @@
 					"$(PROJECT_DIR)/../SDK/TXLiteAVSDK_TRTC_Mac.framework/Headers",
 				);
 				INFOPLIST_FILE = TRTCDemo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LiteAVMacDemo;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

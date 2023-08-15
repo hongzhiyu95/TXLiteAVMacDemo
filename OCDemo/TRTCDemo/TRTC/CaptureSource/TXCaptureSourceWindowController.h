@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) void(^onSelectSource)(id  _Nullable);
 @property (copy, nonatomic) void(^onSelectSourceIndex)(int index);
 @property (nonatomic, readonly) BOOL usesBigStream;
-
+@property (nonatomic, readonly) BOOL isloopback;
 - (instancetype)initWithTRTCCloud:(TRTCCloud *)engine;
 
 @end

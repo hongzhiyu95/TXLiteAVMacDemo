@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="collectionView" destination="qag-xx-n95" id="9zL-Xk-cJv"/>
                 <outlet property="streamTypeButton" destination="E38-Fn-R2w" id="OfL-67-lzg"/>
+                <outlet property="systemLoopbackButton" destination="bu6-oY-def" id="a49-vz-gHn"/>
                 <outlet property="window" destination="Tjf-3m-zhm" id="S8V-Yy-jH7"/>
             </connections>
         </customObject>
@@ -19,7 +20,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="283" y="305" width="652" height="429"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
             <view key="contentView" id="WKx-td-Zy0">
                 <rect key="frame" x="0.0" y="0.0" width="652" height="429"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -48,30 +49,41 @@
                         </scroller>
                     </scrollView>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HgH-VX-XqH">
-                        <rect key="frame" x="15" y="2" width="67" height="32"/>
+                        <rect key="frame" x="14" y="2" width="61" height="32"/>
                         <buttonCell key="cell" type="push" title="取消" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WuY-Km-oPK">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                            <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
                             <action selector="onClose:" target="-2" id="Uu2-za-q6r"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dn9-Hy-9kE">
-                        <rect key="frame" x="82" y="2" width="120" height="32"/>
+                        <rect key="frame" x="73" y="2" width="114" height="32"/>
                         <buttonCell key="cell" type="push" title="结束屏幕分享" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6R6-w6-VRO">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                            <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
                             <action selector="endScreenShare:" target="-2" id="MuW-Fu-yvt"/>
                         </connections>
                     </button>
                     <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E38-Fn-R2w">
-                        <rect key="frame" x="518" y="11" width="115" height="18"/>
+                        <rect key="frame" x="512" y="10" width="119" height="18"/>
                         <buttonCell key="cell" type="check" title="屏幕分享到主路" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ora-R4-kZb">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bu6-oY-def">
+                        <rect key="frame" x="194" y="10" width="106" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="104" id="Ifb-HI-TpZ"/>
+                            <constraint firstAttribute="height" constant="16" id="N3c-TY-bdk"/>
+                        </constraints>
+                        <buttonCell key="cell" type="check" title="分享系统声音" bezelStyle="regularSquare" imagePosition="left" inset="2" id="522-HY-vHN">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" size="13" name=".PingFangSC-Regular"/>
                         </buttonCell>
                     </button>
                 </subviews>
@@ -81,14 +93,16 @@
                     <constraint firstAttribute="bottom" secondItem="HgH-VX-XqH" secondAttribute="bottom" constant="9" id="Hgc-3e-2BP"/>
                     <constraint firstAttribute="trailing" secondItem="E38-Fn-R2w" secondAttribute="trailing" constant="21" id="Oai-k1-AWj"/>
                     <constraint firstAttribute="trailing" secondItem="SXN-27-AMK" secondAttribute="trailing" id="UR5-kC-Amz"/>
+                    <constraint firstItem="bu6-oY-def" firstAttribute="centerY" secondItem="dn9-Hy-9kE" secondAttribute="centerY" id="boS-1g-D1f"/>
                     <constraint firstItem="SXN-27-AMK" firstAttribute="top" secondItem="WKx-td-Zy0" secondAttribute="top" id="eBa-dU-ip0"/>
                     <constraint firstItem="HgH-VX-XqH" firstAttribute="leading" secondItem="WKx-td-Zy0" secondAttribute="leading" constant="21" id="nRb-rs-UES"/>
+                    <constraint firstItem="bu6-oY-def" firstAttribute="leading" secondItem="dn9-Hy-9kE" secondAttribute="trailing" constant="16" id="qQh-7T-RsW"/>
                     <constraint firstItem="E38-Fn-R2w" firstAttribute="centerY" secondItem="dn9-Hy-9kE" secondAttribute="centerY" id="uwL-CG-dnQ"/>
                     <constraint firstItem="dn9-Hy-9kE" firstAttribute="leading" secondItem="HgH-VX-XqH" secondAttribute="trailing" constant="12" id="x8e-ho-Frb"/>
                     <constraint firstAttribute="bottom" secondItem="dn9-Hy-9kE" secondAttribute="bottom" constant="9" id="zZB-Ys-ocH"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="-333" y="-423.5"/>
+            <point key="canvasLocation" x="-567" y="-447"/>
         </window>
         <collectionViewItem id="sFe-OA-Jje"/>
     </objects>

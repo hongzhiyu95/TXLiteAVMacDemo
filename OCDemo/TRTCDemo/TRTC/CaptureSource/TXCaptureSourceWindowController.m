@@ -18,6 +18,7 @@
 }
 @property (weak) IBOutlet NSCollectionView *collectionView;
 @property (weak) IBOutlet NSButton *streamTypeButton;
+@property (weak) IBOutlet NSButton *systemLoopbackButton;
 
 @end
 
@@ -69,7 +70,14 @@
 - (BOOL)usesBigStream {
     return self.streamTypeButton.state == NSControlStateValueOn;
 }
-
+-(BOOL)isloopback{if(self.systemLoopbackButton.state == NSControlStateValueOn){
+    //勾选上就安装驱动
+    [self.engine startSystemAudioLoopback];
+    [self.engine stopSystemAudioLoopback];
+}
+    return self.systemLoopbackButton.state == NSControlStateValueOn;
+    
+}
 #pragma mark - NSCollectionViewDataSource
 - (NSView *)collectionView:(NSCollectionView *)collectionView viewForSupplementaryElementOfKind:(NSCollectionViewSupplementaryElementKind)kind atIndexPath:(NSIndexPath *)indexPath
 {

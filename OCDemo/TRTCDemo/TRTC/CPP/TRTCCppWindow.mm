@@ -13,6 +13,8 @@
 #import "GenerateTestUserSig.h"
 #import "TXCaptureSourceWindowController.h"
 #import "TRTCUserManager.h"
+#import "HoverView.h"
+#import "TXCppRenderView.h"
 #define kButtonTitleAttr @{ NSForegroundColorAttributeName : [NSColor whiteColor] }
 
 
@@ -63,13 +65,34 @@ public:
     void onRecvSEIMsg(const char* userId, const uint8_t* message, uint32_t messageSize);
     
 };
-@interface TRTCCppWindow ()<NSWindowDelegate,TRTCCloudDelegate>
-@property (weak) IBOutlet NSView *videoView;
+@interface TXLiteAVDemoDeviceInfo : NSObject
+@property (copy ,nonatomic) NSString* deviceID;
+@property (copy ,nonatomic) NSString* deviceName;
+@end
+
+@interface TRTCCppWindow ()<NSWindowDelegate,TRTCCloudDelegate,NSTableViewDelegate,NSTableViewDataSource>
+
+
+
 @property (nonatomic, strong) TRTCUserManager *userManager;
 @property(nonatomic,strong) TXCaptureSourceWindowController *captureSourceWindowController;
 @property (strong ,nonatomic) NSMutableDictionary* remoteUserViewDic;
-@end
+@property (weak) IBOutlet NSButton *micDeviceButton;
 
+@property (strong) IBOutlet NSTableView *audioSelectView;
+@property (strong) IBOutlet NSTableView *videoSelectView;
+@property(nonatomic,strong) NSMutableArray *micArr;
+@property(nonatomic,strong) NSMutableArray *speakerArr;
+@property(nonatomic,strong) NSMutableArray *cameraArr;
+@property (strong)IBOutlet TXCppRenderView *localVideoView;
+
+
+@end
+@implementation TXLiteAVDemoDeviceInfo
+
+
+
+@end
 
 @implementation TRTCCppWindow {
     
@@ -97,8 +120,12 @@ public:
     params.userId = [userid cStringUsingEncoding:NSUTF8StringEncoding];
     const char* userSig =  [[GenerateTestUserSig genTestUserSig:userid] cStringUsingEncoding:NSUTF8StringEncoding];
     params.userSig = userSig;
+  
+        [_localVideoView setFrame:NSMakeRect(0, 0, self.window.contentView.frame.size.width, self.window.contentView.frame.size.width*9/16)];
+//    [self.window.contentView addSubview:_localVideoView];
     _trtc->enterRoom(params,liteav::TRTCAppSceneLIVE);
-    _trtc->startLocalPreview((__bridge void*)self.videoView);
+  //  self.localVideoView = [TXRenderView renderViewWithUserId:userid isMe:YES];
+    _trtc->startLocalPreview((__bridge liteav:: TXView )self.localVideoView);
     _trtc->startLocalAudio(liteav::TRTCAudioQualityMusic);
     _trtc->setAudioFrameCallback(_trtcCloudAudioFrameCallBack);
     _trtc->addCallback(_cloudDelegate);
@@ -120,11 +147,31 @@ public:
 //    _trtc->selectScreenCaptureTarget(info, rect, ppt);
 //    _trtc -> startScreenCapture(nullptr, TRTCVideoStreamTypeSub, nil);
 //    self.captureSourceWindowController = [[TXCaptureSourceWindowController alloc] initWithTRTCCloud:nil];
+   // [[[TRTCCloud sharedInstance]getDeviceManager]getDevicesList:TXMediaDeviceTypeAudioInput];
+    self.micArr = [self _configDeviceArrWithCppDeviceList:_trtc->getDeviceManager()->getDevicesList(liteav::TXMediaDeviceTypeMic)];
+    self.speakerArr = [self _configDeviceArrWithCppDeviceList:_trtc->getDeviceManager()->getDevicesList(liteav::TXMediaDeviceTypeSpeaker)];
+    
+    [self _configPopUpMenu:_audioSelectView];
+    self.audioSelectView.frame = CGRectMake(self.audioSelectView.frame.origin.x, self.audioSelectView.frame.origin.y, self.audioSelectView.frame.size.width, (self.micArr.count+self.speakerArr.count+1)*26);
+    
+}
+-(NSMutableArray *)_configDeviceArrWithCppDeviceList:(liteav::ITXDeviceCollection*)cppDeciveCollection{
+    NSMutableArray * deviceArray = [NSMutableArray array];
+    if (cppDeciveCollection->getCount()<=0) {
+        return  nil;
+    }
+    for(int i=0;i<cppDeciveCollection->getCount();i++){
+        TXLiteAVDemoDeviceInfo *info = [[TXLiteAVDemoDeviceInfo alloc]init];
+        info.deviceID = [NSString stringWithUTF8String:cppDeciveCollection->getDevicePID(i)];
+        info.deviceName = [NSString stringWithUTF8String:cppDeciveCollection->getDeviceName(i)];
+        [deviceArray addObject:info];
+    }
+    return deviceArray;
 }
 -(void)onUserVideoAvailable:(NSString *)userId available:(BOOL)available{
     NSLog(@"[YT]---ObjC callbak--onUserVideoAvailable");
     if (userId) {
-        NSView *remoteRenderView = self.remoteUserViewDic [userId];
+        TXCppRenderView *remoteRenderView = self.remoteUserViewDic [userId];
         if (available) {
             if (!remoteRenderView) {
                 NSInteger index = self.remoteUserViewDic.allKeys.count;
@@ -137,8 +184,8 @@ public:
                 }
                 CGFloat kRenderViewWidth = self.window.contentView.frame.size.width/5;
                 CGFloat kRenderViewHeight = (self.window.contentView.frame.size.width/5)/9*16;
-                remoteRenderView = [[NSView alloc]initWithFrame:NSMakeRect(index*kRenderViewWidth, line*kRenderViewHeight, kRenderViewWidth, kRenderViewHeight)];
-                [self.videoView addSubview:remoteRenderView];
+                remoteRenderView = [[TXCppRenderView alloc]initWithFrame:NSMakeRect(index*kRenderViewWidth, line*kRenderViewHeight, kRenderViewWidth, kRenderViewHeight)];
+                [self.localVideoView addSubview:remoteRenderView];
                 self.remoteUserViewDic[userId] = remoteRenderView;
                 _trtc->startRemoteView([userId UTF8String],  liteav::TRTCVideoStreamTypeBig, (__bridge void *)remoteRenderView);
             }
@@ -153,13 +200,14 @@ public:
         }
     }
 }
+
 -(void)updateRemoteViews{
     if (self.remoteUserViewDic.allValues.count>0) {
         NSInteger curIndex = 0;
         NSInteger curLine = 1;
         CGFloat kRenderViewWidth = self.window.contentView.frame.size.width/5;
         CGFloat kRenderViewHeight = (self.window.contentView.frame.size.width/5)/9*16;
-        for (NSView *renderView in self.remoteUserViewDic.allValues) {
+        for (TXCppRenderView *renderView in self.remoteUserViewDic.allValues) {
             if(curIndex==5){
                 curLine  = 2;
                 curIndex = 0;
@@ -172,6 +220,17 @@ public:
    
     
 }
+#pragma  mark -配置弹出式列表
+- (void)_configPopUpMenu:(NSTableView *)tableView  {
+    [tableView setBackgroundColor:[NSColor colorWithRed:0.18 green:0.18 blue:0.18 alpha:1.0]];
+    [[tableView enclosingScrollView] setDrawsBackground:NO];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+   // tableView.hidden = YES;
+    [tableView enclosingScrollView].hidden = YES;
+    [tableView enclosingScrollView].borderType = NSNoBorder;
+    tableView.selectionHighlightStyle = NSTableViewSelectionHighlightStyleNone;
+}
 #pragma mark 静音
 
 - (IBAction)muteLocalAudioClicked:(NSButton*)button {
@@ -180,6 +239,51 @@ public:
                                                              attributes:kButtonTitleAttr];
     _trtc->muteLocalAudio(button.state);
     
+}
+- (void)mouseDown:(NSEvent *)event {
+   // [self.videoSelectView enclosingScrollView].hidden = YES;
+    [self.audioSelectView enclosingScrollView].hidden = YES;
+}
+
+- (IBAction)micDeviceButtonClicked:(NSButton *)button {
+    [self.audioSelectView enclosingScrollView].hidden = ![self.audioSelectView enclosingScrollView].hidden;
+    if ([self.audioSelectView enclosingScrollView].hidden == NO) {
+        //[self.videoSelectView enclosingScrollView].hidden = YES;
+    }
+    [self.micArr removeAllObjects];
+    [self.speakerArr removeAllObjects];
+//    self.micArr = [NSMutableArray arrayWithArray:[self.trtcEngine getMicDevicesList]];
+//    self.speakerArr = [NSMutableArray arrayWithArray:[self.trtcEngine getSpeakerDevicesList]];
+    self.micArr = [self _configDeviceArrWithCppDeviceList:_trtc->getDeviceManager()->getDevicesList(liteav::TXMediaDeviceTypeMic)];
+    self.speakerArr = [self _configDeviceArrWithCppDeviceList:_trtc->getDeviceManager()->getDevicesList(liteav::TXMediaDeviceTypeSpeaker)];
+    [self.micArr insertObject:@"选择麦克风" atIndex:0];
+    [self.speakerArr insertObject:@"选择扬声器" atIndex:0];
+    [self.audioSelectView reloadData];
+}
+- (IBAction)onClickAudioSourceTableItem:(id)sender{
+    NSTableView *tableView = sender;
+    NSInteger row = [tableView selectedRow];
+    NSMutableArray *audioArr = [NSMutableArray arrayWithArray:self.micArr];
+    [audioArr addObjectsFromArray:self.speakerArr];
+    [audioArr addObject:@"音频设置"];
+    id object = [audioArr objectAtIndex:row];
+    if ([object isKindOfClass:[TXLiteAVDemoDeviceInfo class]]) {
+        //选择默认设备
+        TXLiteAVDemoDeviceInfo *source = (TXLiteAVDemoDeviceInfo *)object;
+        if ([self.micArr containsObject:object] ) {
+            _trtc->getDeviceManager()->setCurrentDevice(liteav::TXMediaDeviceTypeMic, [source.deviceID UTF8String]);
+        }
+        else if ([self.speakerArr containsObject:object]){
+            _trtc->getDeviceManager()->setCurrentDevice(liteav::TXMediaDeviceTypeSpeaker, [source.deviceID UTF8String]);
+        }
+    }
+//    else if ([object isKindOfClass:[NSString class]] && [object isEqualToString:@"音频设置"]){
+//        if (self.onAudioSettingsButton) {
+//            self.onAudioSettingsButton();
+//        }
+//    }
+    [self.audioSelectView enclosingScrollView].hidden = YES;
+    [self.videoSelectView enclosingScrollView].hidden = YES;
 }
 #pragma mark 屏幕分享点击
 - (IBAction)startScreenCapture:(id)sender {
@@ -212,7 +316,13 @@ public:
         rect.right = 0;
         rect.top = 0;
         rect.bottom = 0;
-        if (source.sourceId!=NULL && source.type != TRTCScreenCaptureSourceTypeUnknown) {
+        if (self.captureSourceWindowController.isloopback) {
+            _trtc->startSystemAudioLoopback();
+        }
+        else{
+            _trtc->stopSystemAudioLoopback();
+        }
+        if (source.sourceId!=nullptr  && source.type != TRTCScreenCaptureSourceTypeUnknown) {
             if (source.type == TRTCScreenCaptureSourceTypeWindow) {
                 self->_trtc->selectScreenCaptureTarget(source, rect, ppt);
             } else if (source.type == TRTCScreenCaptureSourceTypeScreen) {
@@ -237,6 +347,7 @@ public:
 - (void)windowDidLoad {
     [super windowDidLoad];
     _remoteUserViewDic = [NSMutableDictionary dictionary];
+  
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 -(void)windowWillClose:(NSNotification *)notification{
@@ -245,6 +356,164 @@ public:
     _trtc->destroyTRTCShareInstance();
     delete  _trtcCloudAudioFrameCallBack;
 }
+// 判断是否是当前使用的扬声器
+-(BOOL)isSelectSpeakerDevice:(NSString *)deviceId{
+   // return [[TRTC getCurrentMicDevice].deviceId isEqualToString:deviceId];
+    liteav::ITXDeviceInfo *info =_trtc->getDeviceManager()->getCurrentDevice(liteav::TXMediaDeviceTypeSpeaker);
+    return [deviceId isEqualToString:[NSString stringWithUTF8String:info->getDevicePID()]];
+  
+}
+// 判断是否是当前使用的麦克
+-(BOOL)isSelectedMicDevice:(NSString *)deviceId{
+   // return [[TRTC getCurrentMicDevice].deviceId isEqualToString:deviceId];
+    liteav::ITXDeviceInfo *info =_trtc->getDeviceManager()->getCurrentDevice(liteav::TXMediaDeviceTypeMic);
+    return [deviceId isEqualToString:[NSString stringWithUTF8String:info->getDevicePID()]];
+   // return false;
+}
+
+// 判断是否是当前使用的摄像头
+-(BOOL)isSelectedCameraDevice:(NSString *)deviceId{
+  //  return [deviceId isEqualToString: [self.trtcEngine getCurrentCameraDevice].deviceId];
+    liteav::ITXDeviceInfo *info =_trtc->getDeviceManager()->getCurrentDevice(liteav::TXMediaDeviceTypeCamera);
+    return [deviceId isEqualToString:[NSString stringWithUTF8String:info->getDevicePID()]];
+    return false;
+}
+
+#pragma mark -设备列表
+-(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    if (tableView == self.audioSelectView) {
+        return self.micArr.count + self.speakerArr.count + 1;
+    } else {
+        return self.cameraArr.count + 1;
+    }
+}
+
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+    return 26;
+}
+
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
+    if (tableView == self.audioSelectView) {
+        NSTableCellView *view;
+        if (row < self.micArr.count) {
+            id object =  self.micArr[row];
+            if ([object isKindOfClass:[NSString class]]) {
+                view = [tableView  makeViewWithIdentifier:@"SelectMicRow" owner:self];
+                view.textField.stringValue = object;
+                view.textField.textColor = [NSColor whiteColor];
+            }
+            else if([object isKindOfClass:[TXLiteAVDemoDeviceInfo class]]){
+                view = [tableView makeViewWithIdentifier:@"MicDeviceRow" owner:self];
+                view.textField.stringValue = ((TXLiteAVDemoDeviceInfo *)object).deviceName;
+                view.imageView.hidden = ![self isSelectedMicDevice:((TXLiteAVDemoDeviceInfo *)object).deviceID];
+                view.textField.textColor = [NSColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1.0];
+                [view setHover];
+            }
+            if (row == self.micArr.count - 1) {
+                NSView *bottomLine = [[NSView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width, 1)];
+                bottomLine.wantsLayer = YES;
+                bottomLine.layer.backgroundColor = [NSColor colorWithRed:0.44 green:0.44 blue:0.44 alpha:1.0].CGColor;
+                [view addSubview:bottomLine];
+            }
+        }
+        else if(row < self.micArr.count + self.speakerArr.count){
+            id object = self.speakerArr[row - self.micArr.count];
+            if ([object isKindOfClass:[NSString class]]) {
+                view = [tableView  makeViewWithIdentifier:@"SelectSpeakerRow" owner:self];
+                view.textField.stringValue = object;
+                view.textField.textColor = [NSColor whiteColor];
+            }
+            else if([object isKindOfClass:[TXLiteAVDemoDeviceInfo class]]){
+                view = [tableView makeViewWithIdentifier:@"SpeakerDeviceRow" owner:self];
+                view.textField.stringValue = ((TXLiteAVDemoDeviceInfo *)object).deviceName;
+                view.textField.textColor = [NSColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1.0];;
+                view.imageView.hidden = ![self isSelectSpeakerDevice:((TXLiteAVDemoDeviceInfo *)object).deviceID];
+                [view setHover];
+            }
+            if ((row - self.micArr.count) == self.speakerArr.count - 1) {
+                NSView *bottomLine = [[NSView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width, 1)];
+                bottomLine.wantsLayer = YES;
+                bottomLine.layer.backgroundColor = [NSColor colorWithRed:0.44 green:0.44 blue:0.44 alpha:1.0].CGColor;
+                [view addSubview:bottomLine];
+            }
+        }
+        else{
+            view = [tableView makeViewWithIdentifier:@"AudioSettingRow" owner:self];
+            view.textField.stringValue = @"音频设置";
+            view.textField.textColor = [NSColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1.0];;
+            [view setHover];
+        }
+        return view;
+    } else {
+        NSTableCellView *view;
+        if (row < self.cameraArr.count) {
+            id object =  self.cameraArr[row];
+            if ([object isKindOfClass:[NSString class]]) {
+                view = [tableView  makeViewWithIdentifier:@"SelectVideoRow" owner:self];
+                view.textField.stringValue = object;
+                view.textField.textColor = [NSColor whiteColor];
+            }
+            else if([object isKindOfClass:[TXLiteAVDemoDeviceInfo class]]){
+                view = [tableView makeViewWithIdentifier:@"VideoDeviceRow" owner:self];
+                view.textField.stringValue = ((TXLiteAVDemoDeviceInfo *)object).deviceName;
+                view.imageView.hidden = ![self isSelectedCameraDevice:((TXLiteAVDemoDeviceInfo *)object).deviceID];
+                view.textField.textColor = [NSColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1.0];
+                [view setHover];
+            }
+            if (row == self.cameraArr.count - 1) {
+                NSView *bottomLine = [[NSView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width, 1)];
+                bottomLine.wantsLayer = YES;
+                bottomLine.layer.backgroundColor = [NSColor colorWithRed:0.44 green:0.44 blue:0.44 alpha:1.0].CGColor;
+                [view addSubview:bottomLine];
+            }
+        }
+        else{
+            view = [tableView makeViewWithIdentifier:@"VideoSettingRow" owner:self];
+            view.textField.stringValue = @"视频设置";
+            view.textField.textColor = [NSColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1.0];
+            [view setHover];
+        }
+        return view;
+    }
+}
+
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
+{
+    if (tableView == self.audioSelectView) {
+        if (row < self.micArr.count) {
+            id object =  self.micArr[row];
+            if ([object isKindOfClass:[NSString class]]) {
+                return NO;
+            }
+            else if([object isKindOfClass:[TXLiteAVDemoDeviceInfo class]]){
+                return YES;
+            }
+        }
+        else if(row < self.micArr.count + self.speakerArr.count){
+            id object = self.speakerArr[row - self.micArr.count];
+            if ([object isKindOfClass:[NSString class]]) {
+                return NO;
+            }
+            else if([object isKindOfClass:[TXLiteAVDemoDeviceInfo class]]){
+                return YES;
+            }
+        }
+        return YES;
+    }
+    else{
+        if (row < self.cameraArr.count) {
+            id object =  self.micArr[row];
+            if ([object isKindOfClass:[NSString class]]) {
+                return NO;
+            }
+            else if([object isKindOfClass:[TXLiteAVDemoDeviceInfo class]]){
+                return YES;
+            }
+        }
+        return YES;
+    }
+}
+
 #pragma mark -trtcCallBack回调处理
 void MyTRTCCoudCallBack::onError(TXLiteAVError errCode, const char *errMsg, void *extraInfo) {
  
