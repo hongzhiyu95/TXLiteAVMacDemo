@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22138.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22138.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,43 +28,43 @@
                 <subviews>
                     <button imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ffp-8Y-UjY">
                         <rect key="frame" x="20" y="12" width="60" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="60" id="hqb-0w-XoI"/>
-                            <constraint firstAttribute="height" constant="60" id="xgH-x7-4b1"/>
-                        </constraints>
                         <buttonCell key="cell" type="square" title="静音" bezelStyle="shadowlessSquare" image="main_tool_audio_on" imagePosition="above" alignment="center" inset="2" id="SUf-AK-GQx">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="systemSemibold" size="13"/>
                         </buttonCell>
                         <color key="contentTintColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="hqb-0w-XoI"/>
+                            <constraint firstAttribute="height" constant="60" id="xgH-x7-4b1"/>
+                        </constraints>
                         <connections>
                             <action selector="muteLocalAudioClicked:" target="-2" id="hVP-kS-GEn"/>
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="i8o-Cv-yXe">
                         <rect key="frame" x="80" y="12" width="20" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="20" id="2fE-dt-57r"/>
-                            <constraint firstAttribute="height" constant="60" id="3j3-OC-YnZ"/>
-                        </constraints>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="main_tool_arrow" imagePosition="only" alignment="center" inset="2" id="ojJ-Y0-C9w">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="2fE-dt-57r"/>
+                            <constraint firstAttribute="height" constant="60" id="3j3-OC-YnZ"/>
+                        </constraints>
                         <connections>
                             <action selector="micDeviceButtonClicked:" target="-2" id="5Y7-Al-GTd"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k4l-h8-A8R">
                         <rect key="frame" x="225" y="25" width="88" height="32"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="74" id="q8X-oR-z5F"/>
-                            <constraint firstAttribute="height" constant="20" id="u23-Th-0Ye"/>
-                        </constraints>
                         <buttonCell key="cell" type="push" title="屏幕分享" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="q3C-Od-8td">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="74" id="q8X-oR-z5F"/>
+                            <constraint firstAttribute="height" constant="20" id="u23-Th-0Ye"/>
+                        </constraints>
                         <connections>
                             <action selector="startScreenCapture:" target="-2" id="QbN-DA-lvB"/>
                         </connections>
@@ -102,7 +102,7 @@
                                                     <rect key="frame" x="1" y="1" width="236" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AJf-lz-yp7">
+                                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AJf-lz-yp7">
                                                             <rect key="frame" x="7" y="0.0" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="kwK-lf-vhQ">
@@ -125,7 +125,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="check" id="t2c-oj-coz"/>
                                                         </imageView>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j4g-9D-Khf">
+                                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j4g-9D-Khf">
                                                             <rect key="frame" x="25" y="0.0" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Rbw-Bs-jSn">
@@ -144,7 +144,7 @@
                                                     <rect key="frame" x="1" y="39" width="236" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ux-RT-nnF">
+                                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ux-RT-nnF">
                                                             <rect key="frame" x="7" y="0.0" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="TDi-w5-JHq">
@@ -167,7 +167,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="check" id="Kpn-xJ-T7s"/>
                                                         </imageView>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eO4-fP-d9d">
+                                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eO4-fP-d9d">
                                                             <rect key="frame" x="25" y="0.0" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="ApV-A0-A7c">
@@ -186,7 +186,7 @@
                                                     <rect key="frame" x="1" y="77" width="236" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eV5-HY-5Bz">
+                                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eV5-HY-5Bz">
                                                             <rect key="frame" x="25" y="0.0" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="rq8-h1-SET">
@@ -248,7 +248,7 @@
                                                     <rect key="frame" x="1" y="1" width="236" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6TJ-bg-bpa">
+                                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6TJ-bg-bpa">
                                                             <rect key="frame" x="7" y="0.0" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="5kt-Ji-t05">
@@ -271,7 +271,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="check" id="bge-xU-umY"/>
                                                         </imageView>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V85-8n-2vc">
+                                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V85-8n-2vc">
                                                             <rect key="frame" x="25" y="0.0" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="GwA-m3-YG1">
@@ -290,7 +290,7 @@
                                                     <rect key="frame" x="1" y="39" width="236" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eU6-7B-Up4">
+                                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eU6-7B-Up4">
                                                             <rect key="frame" x="25" y="0.0" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="zPw-7G-eEn">
@@ -324,28 +324,28 @@
                     </scrollView>
                     <button imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lp0-Sc-MGF">
                         <rect key="frame" x="110" y="12" width="60" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="60" id="5zN-OF-h4Y"/>
-                            <constraint firstAttribute="height" constant="60" id="Djk-9v-wNb"/>
-                        </constraints>
                         <buttonCell key="cell" type="square" title="停止视频" bezelStyle="shadowlessSquare" image="main_tool_video_on" imagePosition="above" alignment="center" inset="2" id="mGA-Hb-wPv">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="systemSemibold" size="13"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="5zN-OF-h4Y"/>
+                            <constraint firstAttribute="height" constant="60" id="Djk-9v-wNb"/>
+                        </constraints>
                         <connections>
                             <action selector="onClickVideoMute:" target="-2" id="DXE-qG-Jyz"/>
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="BHY-Oo-ebr">
                         <rect key="frame" x="170" y="12" width="20" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="20" id="2eJ-HB-Ie4"/>
-                            <constraint firstAttribute="height" constant="60" id="eKe-HZ-xdg"/>
-                        </constraints>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="main_tool_arrow" imagePosition="only" alignment="center" inset="2" id="zxw-k6-OhC">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="2eJ-HB-Ie4"/>
+                            <constraint firstAttribute="height" constant="60" id="eKe-HZ-xdg"/>
+                        </constraints>
                         <connections>
                             <action selector="onClickCameraSource:" target="-2" id="89p-W6-KtA"/>
                         </connections>
