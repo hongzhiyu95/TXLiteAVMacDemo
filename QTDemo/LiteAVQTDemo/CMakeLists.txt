@@ -12,12 +12,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-set(CMAKE_INSTALL_RPATH "${PROJECT_SOURCE_DIR}/SDK/TXFFmpeg.xcframework/macos-arm64_x86_64/")
-set(CMAKE_INSTALL_RPATH "${PROJECT_SOURCE_DIR}/SDK/TXSoundTouch.xcframework/macos-arm64_x86_64/")
-set(THIRD_LIB_TRTC_DIR ${PROJECT_SOURCE_DIR}/SDK)
+string(REGEX REPLACE "(.*)/(.*)/(.*)" "/1" PROJECT_INIT_PATH  ${PROJECT_SOURCE_DIR})
+
+set(CMAKE_INSTALL_RPATH "${PROJECT_SOURCE_DIR}/../../SDK/TXFFmpeg.xcframework/macos-arm64_x86_64/")
+set(CMAKE_INSTALL_RPATH "${PROJECT_SOURCE_DIR}/../../SDK/TXSoundTouch.xcframework/macos-arm64_x86_64/")
+set(THIRD_LIB_TRTC_DIR ${PROJECT_SOURCE_DIR}/../../SDK)
 set(THIRD_LIB_TRTC_INCLUDE_DIR
-        ${THIRD_LIB_TRTC_DIR}/TXLiteAVSDK_TRTC_Mac.framework/Headers/cpp_interface
-        ${THIRD_LIB_TRTC_DIR}/TXLiteAVSDK_TRTC_Mac.framework/Headers
+        ${THIRD_LIB_TRTC_DIR}../TXLiteAVSDK_TRTC_Mac.framework/Headers/cpp_interface
+        ${THIRD_LIB_TRTC_DIR}../TXLiteAVSDK_TRTC_Mac.framework/Headers
     )
 
 find_library(TXLiteAVSDK_TRTC_Mac_LIB TXLiteAVSDK_TRTC_Mac ${THIRD_LIB_TRTC_DIR})

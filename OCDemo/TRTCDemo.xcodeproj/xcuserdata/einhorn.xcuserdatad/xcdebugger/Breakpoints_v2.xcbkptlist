@@ -7,49 +7,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C9E1358A-3297-4651-8F53-BE7E195E2651"
+            uuid = "CE5B0B0D-52BC-498F-AD09-3E02F447B8CC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TRTCDemo/TRTC/TRTCMainWindowController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "344"
-            endingLineNumber = "344"
-            landmarkName = "-onClickAudioSource:"
+            startingLineNumber = "563"
+            endingLineNumber = "563"
+            landmarkName = "-onError:errMsg:extInfo:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C9E1358A-3297-4651-8F53-BE7E195E2651 - 6099543ba331bdb6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[TRTCMainWindowController onClickAudioSource:]"
-                  moduleName = "TRTCDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/einhorn/GitRepos/TXLiteAVMacDemo/OCDemo/TRTCDemo/TRTC/TRTCMainWindowController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "344"
-                  endingLineNumber = "344"
-                  offsetFromSymbolStart = "708">
-               </Location>
-               <Location
-                  uuid = "C9E1358A-3297-4651-8F53-BE7E195E2651 - 6099543ba331bdb6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[TRTCMainWindowController onClickAudioSource:]"
-                  moduleName = "TRTCDemo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/einhorn/GitRepos/TXLiteAVMacDemo/OCDemo/TRTCDemo/TRTC/TRTCMainWindowController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "344"
-                  endingLineNumber = "344"
-                  offsetFromSymbolStart = "933">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "30439D57-AB8A-4AE9-ADEE-55C116C57B69"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TRTCDemo/TRTC/TRTCMainWindowController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "577"
+            endingLineNumber = "577"
+            landmarkName = "-onError:errMsg:extInfo:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

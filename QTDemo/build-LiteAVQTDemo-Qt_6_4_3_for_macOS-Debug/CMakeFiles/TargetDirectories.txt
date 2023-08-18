@@ -1,0 +1,9 @@
+/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/CMakeFiles/LiteAVQTDemo.dir
+/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/CMakeFiles/edit_cache.dir
+/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/CMakeFiles/rebuild_cache.dir
+/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/CMakeFiles/list_install_components.dir
+/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/CMakeFiles/install.dir
+/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/CMakeFiles/install/local.dir
+/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/CMakeFiles/install/strip.dir
+/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/CMakeFiles/LiteAVQTDemo_autogen_timestamp_deps.dir
+/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/CMakeFiles/LiteAVQTDemo_autogen.dir

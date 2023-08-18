@@ -1,9 +1,0 @@
-/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_arm_darwin_generic_mach_o_64bit-Debug/CMakeFiles/LiteAVQTDemo.dir
-/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_arm_darwin_generic_mach_o_64bit-Debug/CMakeFiles/edit_cache.dir
-/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_arm_darwin_generic_mach_o_64bit-Debug/CMakeFiles/rebuild_cache.dir
-/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_arm_darwin_generic_mach_o_64bit-Debug/CMakeFiles/list_install_components.dir
-/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_arm_darwin_generic_mach_o_64bit-Debug/CMakeFiles/install.dir
-/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_arm_darwin_generic_mach_o_64bit-Debug/CMakeFiles/install/local.dir
-/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_arm_darwin_generic_mach_o_64bit-Debug/CMakeFiles/install/strip.dir
-/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_arm_darwin_generic_mach_o_64bit-Debug/CMakeFiles/LiteAVQTDemo_autogen_timestamp_deps.dir
-/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_arm_darwin_generic_mach_o_64bit-Debug/CMakeFiles/LiteAVQTDemo_autogen.dir

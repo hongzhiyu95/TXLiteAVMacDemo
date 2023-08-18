@@ -1,0 +1,9 @@
+# ninja log v5
+0	226	1692333125482176950	LiteAVQTDemo_autogen/timestamp	6c23c313ac61b9b1
+0	226	1692333125482176950	LiteAVQTDemo_autogen/mocs_compilation.cpp	6c23c313ac61b9b1
+0	226	1692333125482176950	/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/LiteAVQTDemo_autogen/timestamp	6c23c313ac61b9b1
+0	226	1692333125482176950	/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/LiteAVQTDemo_autogen/mocs_compilation.cpp	6c23c313ac61b9b1
+226	694	1692333125953392160	CMakeFiles/LiteAVQTDemo.dir/LiteAVQTDemo_autogen/mocs_compilation.cpp.o	d193698df526ceb1
+227	702	1692333125961931691	CMakeFiles/LiteAVQTDemo.dir/main.cpp.o	6c7ae12fb5006f11
+227	707	1692333125966599754	CMakeFiles/LiteAVQTDemo.dir/mainwindow.cpp.o	a3141fb361c57bae
+707	867	1692333126124983842	LiteAVQTDemo.app/Contents/MacOS/LiteAVQTDemo	9ac1dce02e34ea3a
