@@ -1,9 +1,16 @@
 # ninja log v5
-0	226	1692333125482176950	LiteAVQTDemo_autogen/timestamp	6c23c313ac61b9b1
-0	226	1692333125482176950	LiteAVQTDemo_autogen/mocs_compilation.cpp	6c23c313ac61b9b1
-0	226	1692333125482176950	/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/LiteAVQTDemo_autogen/timestamp	6c23c313ac61b9b1
-0	226	1692333125482176950	/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/LiteAVQTDemo_autogen/mocs_compilation.cpp	6c23c313ac61b9b1
+12	36	1692346413194552221	LiteAVQTDemo_autogen/timestamp	6c23c313ac61b9b1
+12	36	1692346413194552221	LiteAVQTDemo_autogen/mocs_compilation.cpp	6c23c313ac61b9b1
+12	36	1692346413194552221	/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/LiteAVQTDemo_autogen/timestamp	6c23c313ac61b9b1
+12	36	1692346413194552221	/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/LiteAVQTDemo_autogen/mocs_compilation.cpp	6c23c313ac61b9b1
+42	758	1692346413908649359	CMakeFiles/LiteAVQTDemo.dir/main.cpp.o	6c7ae12fb5006f11
+1	119	1692346502501371238	build.ninja	5df20ecaa2f06a6b
 226	694	1692333125953392160	CMakeFiles/LiteAVQTDemo.dir/LiteAVQTDemo_autogen/mocs_compilation.cpp.o	d193698df526ceb1
-227	702	1692333125961931691	CMakeFiles/LiteAVQTDemo.dir/main.cpp.o	6c7ae12fb5006f11
-227	707	1692333125966599754	CMakeFiles/LiteAVQTDemo.dir/mainwindow.cpp.o	a3141fb361c57bae
-707	867	1692333126124983842	LiteAVQTDemo.app/Contents/MacOS/LiteAVQTDemo	9ac1dce02e34ea3a
+42	758	1692346413912707225	CMakeFiles/LiteAVQTDemo.dir/mainwindow.cpp.o	a3141fb361c57bae
+759	1258	1692346414410416835	LiteAVQTDemo.app/Contents/MacOS/LiteAVQTDemo	9ac1dce02e34ea3a
+15	43	1692346505033984809	LiteAVQTDemo_autogen/timestamp	6c23c313ac61b9b1
+15	43	1692346505033984809	LiteAVQTDemo_autogen/mocs_compilation.cpp	6c23c313ac61b9b1
+15	43	1692346505033984809	/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/LiteAVQTDemo_autogen/timestamp	6c23c313ac61b9b1
+15	43	1692346505033984809	/Users/einhorn/GitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Qt_6_4_3_for_macOS-Debug/LiteAVQTDemo_autogen/mocs_compilation.cpp	6c23c313ac61b9b1
+47	518	1692346505505139108	CMakeFiles/LiteAVQTDemo.dir/mainwindow.cpp.o	a3141fb361c57bae
+518	868	1692346505852476950	LiteAVQTDemo.app/Contents/MacOS/LiteAVQTDemo	a841c1c03eccc93c

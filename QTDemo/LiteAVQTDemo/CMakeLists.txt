@@ -57,6 +57,7 @@ set(THIRD_LIB_TRTC_LIB_LIST
        "-framework OpenAL"
        "-framework QuartzCore"
        "-framework IOKit"
+       "-Wl -ObjC"
 
 
    )
@@ -82,6 +83,7 @@ else()
         )
     endif()
 endif()
+set(CMake_INFO)
 target_link_libraries(LiteAVQTDemo PRIVATE ${THIRD_LIB_TRTC_LIB_LIST})
 target_link_libraries(LiteAVQTDemo PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_include_directories(LiteAVQTDemo PUBLIC ${THIRD_LIB_TRTC_INCLUDE_DIR})
@@ -89,6 +91,7 @@ set_target_properties(LiteAVQTDemo PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE_INFO_PLIST  "${PROJECT_SOURCE_DIR}/Info.plist"
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
