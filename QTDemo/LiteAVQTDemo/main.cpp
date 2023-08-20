@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include<TXLiteAVSDK_TRTC_Mac/cpp_interface/ITRTCCloud.h>
+
+#include<ITRTCCloud.h>
+
+
+
 int main(int argc, char *argv[])
 {
     liteav ::ITRTCCloud *trtc = liteav::ITRTCCloud::getTRTCShareInstance();

@@ -1,0 +1,57 @@
+Performing C++ SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: D:/gitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):D:/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_1dc32 && [1/2] Building CXX object CMakeFiles\cmTC_1dc32.dir\src.cxx.obj
+FAILED: CMakeFiles/cmTC_1dc32.dir/src.cxx.obj 
+"D:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.35.32215\bin\HostX64\x64\cl.exe"  /nologo /TP -DCMAKE_HAVE_LIBC_PTHREAD  -DQT_QML_DEBUG /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\cmTC_1dc32.dir\src.cxx.obj /FdCMakeFiles\cmTC_1dc32.dir\ /FS -c D:\gitRepos\TXLiteAVMacDemo\QTDemo\build-LiteAVQTDemo-Desktop_x86_windows_msvc2022_pe_64bit-Debug\CMakeFiles\CMakeTmp\src.cxx
+D:\gitRepos\TXLiteAVMacDemo\QTDemo\build-LiteAVQTDemo-Desktop_x86_windows_msvc2022_pe_64bit-Debug\CMakeFiles\CMakeTmp\src.cxx(1): fatal error C1083: 无法打开包括文件: “pthread.h”: No such file or directory
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: D:/gitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):D:/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_93ac7 && [1/2] Building CXX object CMakeFiles\cmTC_93ac7.dir\CheckFunctionExists.cxx.obj
+[2/2] Linking CXX executable cmTC_93ac7.exe
+FAILED: cmTC_93ac7.exe 
+cmd.exe /C "cd . && D:\Qt\Tools\CMake_64\bin\cmake.exe -E vs_link_exe --intdir=CMakeFiles\cmTC_93ac7.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100226~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100226~1.0\x64\mt.exe --manifests  -- "D:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.35.32215\bin\Hostx64\x64\link.exe" /nologo CMakeFiles\cmTC_93ac7.dir\CheckFunctionExists.cxx.obj  /out:cmTC_93ac7.exe /implib:cmTC_93ac7.lib /pdb:cmTC_93ac7.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+LINK Pass 1: command "D:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.35.32215\bin\Hostx64\x64\link.exe /nologo CMakeFiles\cmTC_93ac7.dir\CheckFunctionExists.cxx.obj /out:cmTC_93ac7.exe /implib:cmTC_93ac7.lib /pdb:cmTC_93ac7.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\cmTC_93ac7.dir/intermediate.manifest CMakeFiles\cmTC_93ac7.dir/manifest.res" failed (exit code 1104) with the following output:
+LINK : fatal error LNK1104: 无法打开文件“pthreads.lib”
+ninja: build stopped: subcommand failed.
+
+
+
+Determining if the function pthread_create exists in the pthread failed with the following output:
+Change Dir: D:/gitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):D:/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_e2ac5 && [1/2] Building CXX object CMakeFiles\cmTC_e2ac5.dir\CheckFunctionExists.cxx.obj
+[2/2] Linking CXX executable cmTC_e2ac5.exe
+FAILED: cmTC_e2ac5.exe 
+cmd.exe /C "cd . && D:\Qt\Tools\CMake_64\bin\cmake.exe -E vs_link_exe --intdir=CMakeFiles\cmTC_e2ac5.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100226~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100226~1.0\x64\mt.exe --manifests  -- "D:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.35.32215\bin\Hostx64\x64\link.exe" /nologo CMakeFiles\cmTC_e2ac5.dir\CheckFunctionExists.cxx.obj  /out:cmTC_e2ac5.exe /implib:cmTC_e2ac5.lib /pdb:cmTC_e2ac5.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+LINK Pass 1: command "D:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.35.32215\bin\Hostx64\x64\link.exe /nologo CMakeFiles\cmTC_e2ac5.dir\CheckFunctionExists.cxx.obj /out:cmTC_e2ac5.exe /implib:cmTC_e2ac5.lib /pdb:cmTC_e2ac5.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\cmTC_e2ac5.dir/intermediate.manifest CMakeFiles\cmTC_e2ac5.dir/manifest.res" failed (exit code 1104) with the following output:
+LINK : fatal error LNK1104: 无法打开文件“pthread.lib”
+ninja: build stopped: subcommand failed.
+
+
+

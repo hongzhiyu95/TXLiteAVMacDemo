@@ -1,0 +1,17 @@
+# ninja log v5
+4	354	7142188329175044	LiteAVQTDemo_autogen/timestamp	a28f0e1e0f0068f0
+4	354	7142188329175044	LiteAVQTDemo_autogen/mocs_compilation.cpp	a28f0e1e0f0068f0
+2	995	7142188947009751	build.ninja	1a744631c6fbacae
+4	354	7142188329175044	D:/gitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_x86_windows_msvc2022_pe_64bit-Debug/LiteAVQTDemo_autogen/timestamp	a28f0e1e0f0068f0
+4	354	7142188329175044	D:/gitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_x86_windows_msvc2022_pe_64bit-Debug/LiteAVQTDemo_autogen/mocs_compilation.cpp	a28f0e1e0f0068f0
+684	1898	7142181251150714	CMakeFiles/LiteAVQTDemo.dir/LiteAVQTDemo_autogen/mocs_compilation.cpp.obj	9f57706ec9625b9
+736	1914	7142181251308196	CMakeFiles/LiteAVQTDemo.dir/mainwindow.cpp.obj	a913d85cdede80d9
+4	392	7142188983607126	LiteAVQTDemo_autogen/timestamp	a28f0e1e0f0068f0
+4	392	7142188983607126	LiteAVQTDemo_autogen/mocs_compilation.cpp	a28f0e1e0f0068f0
+4	392	7142188983607126	D:/gitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_x86_windows_msvc2022_pe_64bit-Debug/LiteAVQTDemo_autogen/timestamp	a28f0e1e0f0068f0
+4	392	7142188983607126	D:/gitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_x86_windows_msvc2022_pe_64bit-Debug/LiteAVQTDemo_autogen/mocs_compilation.cpp	a28f0e1e0f0068f0
+4	397	7142194753942475	LiteAVQTDemo_autogen/timestamp	a28f0e1e0f0068f0
+4	397	7142194753942475	LiteAVQTDemo_autogen/mocs_compilation.cpp	a28f0e1e0f0068f0
+4	397	7142194753942475	D:/gitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_x86_windows_msvc2022_pe_64bit-Debug/LiteAVQTDemo_autogen/timestamp	a28f0e1e0f0068f0
+4	397	7142194753942475	D:/gitRepos/TXLiteAVMacDemo/QTDemo/build-LiteAVQTDemo-Desktop_x86_windows_msvc2022_pe_64bit-Debug/LiteAVQTDemo_autogen/mocs_compilation.cpp	a28f0e1e0f0068f0
+399	2173	7142194771604979	CMakeFiles/LiteAVQTDemo.dir/main.cpp.obj	9ec68e6fd3a8d2c1
